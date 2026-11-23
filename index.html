@@ -553,14 +553,14 @@
       <article class="card" role="button" tabindex="0" aria-haspopup="dialog" aria-controls="details2" data-open="details2">
         <div class="card-top">
           <div class="icon" aria-hidden="true">Я</div>
-          <span class="badge">v1.0</span>
+          <span class="badge">v1.1</span>
         </div>
         <div>
           <h2>Перевод</h2>
-          <p class="desc">Перевод выделенного текста по Ctrl+Alt+Q: 19 языков, окно с блюром, выбор языка и настройка цветов.</p>
+          <p class="desc">Перевод без интернета: 16 языков, окно с блюром, клавиша Ctrl+Alt+E и настройка цветов.</p>
         </div>
         <div class="spacer"></div>
-        <div class="meta-row"><span>22 ноября 2026</span><span>ZIP · 19 КБ</span></div>
+        <div class="meta-row"><span>22 ноября 2026</span><span>ZIP · 23 КБ</span></div>
         <button class="btn" type="button">Подробнее</button>
       </article>
 
@@ -645,15 +645,15 @@
         <div class="icon" aria-hidden="true">Я</div>
         <div>
           <h2 id="details2Title">Перевод</h2>
-          <span class="badge">v1.0 · первая версия</span>
+          <span class="badge">v2.1 · обновление</span>
         </div>
         <button class="close" type="button" aria-label="Закрыть">×</button>
       </div>
-      <p>Перевод выделенного текста по Ctrl+Alt+Q: 19 языков, окно с блюром, выбор языка и настройка цветов.</p>
+      <p>Перевод без интернета: 16 языков, окно с блюром, клавиша Ctrl+Alt+E и настройка цветов.</p>
       <div class="facts">
-        <span class="fact">v1.0</span>
+        <span class="fact">v2.1</span>
         <span class="fact">22 ноября 2026</span>
-        <span class="fact">ZIP · 19 КБ</span>
+        <span class="fact">ZIP · 23 КБ</span>
         <span class="fact">Windows 10/11</span>
       </div>
       <div class="shots">
@@ -670,25 +670,25 @@
         <div class="details-main">
           <div>
             <p class="section-label">Что нового</p>
-            <p>Первый выпуск: перевод по Ctrl+Alt+Q, 19 языков, выбор языков в настройках, окно с блюром и прозрачностью.</p>
+            <p>Перевод без интернета на локальных моделях. Исправлен захват выделенного текста, плавные края окна, надпись «Скопировано» исчезает, уведомление можно отключить.</p>
           </div>
           <div>
             <p class="section-label">Установка</p>
             <ol class="steps">
               <li>Скачайте ZIP-архив кнопкой справа.</li>
               <li>Распакуйте и запустите «Установить.bat».</li>
-              <li>Программа добавится в автозагрузку, клавиша Ctrl+Alt+Q начнёт работать.</li>
+              <li>Программа добавится в автозагрузку, клавиша Ctrl+Alt+E начнёт работать.</li>
             </ol>
           </div>
           <div>
             <p class="section-label">Требования</p>
-            <p>Windows 10 или 11, PowerShell 5.1, интернет для перевода. Настройки — ярлык «Перевод (настройка)» на рабочем столе.</p>
+            <p>Windows 10 или 11, PowerShell 5.1. При установке нужен интернет: скачиваются движок и модели (около 1 ГБ). Дальше перевод работает офлайн. Python 3.10+ обязателен.</p>
           </div>
         </div>
         <aside class="dl-card">
           <div class="dl-title">Скачать перевод</div>
           <div class="dl-meta">
-            <div class="dl-row"><span>Версия</span><span>1.0</span></div>
+            <div class="dl-row"><span>Версия</span><span>2.1</span></div>
             <div class="dl-row"><span>Размер</span><span>19 КБ</span></div>
             <div class="dl-row"><span>Формат</span><span>ZIP-архив</span></div>
             <div class="dl-row"><span>Система</span><span>Windows 10/11</span></div>
@@ -718,7 +718,7 @@
 
       const programs = [
         { card: '[data-open="details"]', dialog: 'details', version: '1.1', manifest: 'updates.json' },
-        { card: '[data-open="details2"]', dialog: 'details2', version: '1.0', manifest: 'perevod-updates.json' }
+        { card: '[data-open="details2"]', dialog: 'details2', version: '2.1', manifest: 'perevod-updates.json', rebuilt: true }
       ];
 
       programs.forEach((program) => {
@@ -746,6 +746,10 @@
         if (!checkBtn || !statusEl || !downloadLink) return;
 
         checkBtn.addEventListener('click', async () => {
+          if (program.rebuilt) {
+            statusEl.textContent = 'Эта версия полностью пересобрана — скачайте её заново кнопкой «Скачать».';
+            return;
+          }
           checkBtn.disabled = true;
           statusEl.textContent = 'Проверяем обновления…';
           try {
