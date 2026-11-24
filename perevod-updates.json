@@ -1,6 +1,6 @@
 {
-    "version":  "2.1",
+    "version":  "2.2",
     "url":  "perevod-setup.zip",
-    "sha256":  "F3A2DCDC9FC1A57ED0ED5A93FDAF76F9F4EE7CE807C7406199F4DFED8981BF22",
-    "notes":  "Исправлен захват выделения, плавные края, скрытие надписи «Скопировано», отключение уведомления"
+    "sha256":  "EB50AEFE6A9EB07E219D8ECE4DFE65F2675F905615F8DAC0DEEC4EA28C6AF06C",
+    "notes":  "Яркость цветов и свои звуковые файлы"
 }
